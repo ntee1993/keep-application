@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import Navbar from "./components/AppNavBar";
-import LoginElement from "./components/auth/LoginElement";
+import AppNavbar from "./components/AppNavBar";
+import AppBody from "./components/AppBody";
 
-import { Container } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
@@ -18,10 +17,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Navbar />
-        <Container className="d-flex justify-content-center">
-          <LoginElement />
-        </Container>
+        <AppNavbar />
+        <AppBody />
       </div>
     </Provider>
   );

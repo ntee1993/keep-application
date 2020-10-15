@@ -3,7 +3,6 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { TextField, Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
-import { clearErrors } from "../../actions/errorActions";
 import { connect } from "react-redux";
 
 const init = {
@@ -20,7 +19,7 @@ const theme = createMuiTheme({
   },
 });
 
-const LoginElement = ({ isAuthenticated, error, login, clearErrors }) => {
+const LoginElement = ({ error, login }) => {
   const [state, setState] = useState(init);
 
   useEffect(() => {
@@ -96,15 +95,12 @@ const LoginElement = ({ isAuthenticated, error, login, clearErrors }) => {
 };
 
 LoginElement.propTypes = {
-  isAuthenticated: PropTypes.bool,
   error: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired,
-  clearErrors: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
   error: state.error,
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginElement);
+export default connect(mapStateToProps, { login })(LoginElement);
