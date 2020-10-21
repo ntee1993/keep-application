@@ -7,7 +7,7 @@ const Todo = require('../../models/Todo')
 
 // @route   GET api/todos
 // @desc    Get All Todos
-// @access  Privat
+// @access  Private
 router.get('/', auth, (req, res) => {
     Todo.find()
       .sort({ date: -1 })
