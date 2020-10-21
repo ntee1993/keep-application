@@ -1,19 +1,23 @@
 import axios from 'axios'
-import { GET_TODOS, ADD_TODO, DELETE_TODO, TODOS_LOADING } from "./types";
+import { GET_TODOS, ADD_TODO, DELETE_TODO, TODOS_LOADING, AUTH_ERROR } from "./types";
 import { tokenConfig } from './authActions'
 import { returnErrors } from './errorActions'
 
-export const getTodos = () => (dispatch) => {
+export const getTodos = () => (dispatch, getState) => {    
     dispatch(setTodosLoading())
+
     axios
-        .get('/api/todos')
+        .get('/api/todos', tokenConfig(getState))
         .then((res) => dispatch({
             type: GET_TODOS,
             payload: res.data
         }))
-        .catch((err) => dispatch(
-            returnErrors(err.response.data, err.response.status)
-        ))
+        .catch((err) => {
+            dispatch(returnErrors(err.response.data, err.response.status))
+            dispatch({
+                type: AUTH_ERROR
+            })
+        })
 }
 
 export const addTodo = (todo) => (dispatch, getState) => {

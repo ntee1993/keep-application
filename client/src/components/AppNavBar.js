@@ -8,8 +8,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Container,
-  NavLink,
+  Container
 } from "reactstrap";
 import RegisterModal from './auth/RegisterModal'
 import Logout from './auth/Logout'
